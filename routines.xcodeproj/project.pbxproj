@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69B6240C2CF2972700A927D5 /* RoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */; };
+		69B6240E2CF2975B00A927D5 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240D2CF2975B00A927D5 /* RoutineListView.swift */; };
+		69B624102CF2979000A927D5 /* RoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240F2CF2979000A927D5 /* RoutineView.swift */; };
 		69F9DC2D2CF25883001B305F /* routinesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F9DC2C2CF25883001B305F /* routinesApp.swift */; };
-		69F9DC2F2CF25883001B305F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F9DC2E2CF25883001B305F /* ContentView.swift */; };
 		69F9DC312CF25884001B305F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69F9DC302CF25884001B305F /* Assets.xcassets */; };
 		69F9DC342CF25884001B305F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69F9DC332CF25884001B305F /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineViewModel.swift; sourceTree = "<group>"; };
+		69B6240D2CF2975B00A927D5 /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
+		69B6240F2CF2979000A927D5 /* RoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineView.swift; sourceTree = "<group>"; };
 		69F9DC292CF25883001B305F /* routines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = routines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F9DC2C2CF25883001B305F /* routinesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routinesApp.swift; sourceTree = "<group>"; };
-		69F9DC2E2CF25883001B305F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		69F9DC302CF25884001B305F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69F9DC332CF25884001B305F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +55,10 @@
 		69F9DC2B2CF25883001B305F /* routines */ = {
 			isa = PBXGroup;
 			children = (
+				69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */,
 				69F9DC2C2CF25883001B305F /* routinesApp.swift */,
-				69F9DC2E2CF25883001B305F /* ContentView.swift */,
+				69B6240D2CF2975B00A927D5 /* RoutineListView.swift */,
+				69B6240F2CF2979000A927D5 /* RoutineView.swift */,
 				69F9DC302CF25884001B305F /* Assets.xcassets */,
 				69F9DC322CF25884001B305F /* Preview Content */,
 			);
@@ -95,7 +101,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					69F9DC282CF25883001B305F = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69F9DC2F2CF25883001B305F /* ContentView.swift in Sources */,
+				69B6240E2CF2975B00A927D5 /* RoutineListView.swift in Sources */,
+				69B624102CF2979000A927D5 /* RoutineView.swift in Sources */,
+				69B6240C2CF2972700A927D5 /* RoutineViewModel.swift in Sources */,
 				69F9DC2D2CF25883001B305F /* routinesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +189,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -241,6 +250,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
