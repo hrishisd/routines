@@ -20,8 +20,8 @@ struct Task: Identifiable {
 let exampleRoutine = Routine(
     name: "morning routine",
     tasks: [
-        Task(instruction: "floss", durationSecs: 180),
-        Task(instruction: "brush", durationSecs: 120),
-        Task(instruction: "wash face", durationSecs: 60),
-        Task(instruction: "lotion", durationSecs: 60),
+        Task(instruction: "floss", durationSecs: 5),
+        Task(instruction: "brush", durationSecs: 5),
+        Task(instruction: "wash face", durationSecs: 6),
+        Task(instruction: "lotion", durationSecs: 6),
     ])

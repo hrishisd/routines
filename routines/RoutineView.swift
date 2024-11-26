@@ -11,14 +11,14 @@ struct RoutineView: View {
     @Binding var routine: Routine
 
     var body: some View {
-        VStack {
+//        VStack {
             NavigationView {
                 NavigationLink(destination: TimerView(tasks: $routine.tasks)) {
                     Image(systemName: "play")
-                    Text("PLAY")
+                    Text("Play")
                 }
             }
-            .frame(maxHeight: 50)
+            .frame(maxHeight: 200)
             Group {
                 List($routine.tasks) { $task in
                     TaskRow(task: $task)
@@ -34,7 +34,7 @@ struct RoutineView: View {
                     }
                 }
             }
-        }
+//        }
     }
 }
 
