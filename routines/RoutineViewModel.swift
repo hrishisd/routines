@@ -17,3 +17,11 @@ struct Task: Identifiable {
     var durationSecs: UInt
 }
 
+let exampleRoutine = Routine(
+    name: "morning routine",
+    tasks: [
+        Task(instruction: "floss", durationSecs: 180),
+        Task(instruction: "brush", durationSecs: 120),
+        Task(instruction: "wash face", durationSecs: 60),
+        Task(instruction: "lotion", durationSecs: 60),
+    ])

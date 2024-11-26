@@ -11,19 +11,26 @@ struct RoutineView: View {
     @Binding var routine: Routine
 
     var body: some View {
-        Group {
-            List($routine.tasks) { $task in
-                TaskRow(task: $task)
+        VStack {
+            NavigationView {
+                NavigationLink(destination: TimerView(tasks: $routine.tasks)) {
+                    Image(systemName: "play")
+                    Text("PLAY")
+                }
             }
-            .navigationTitle(routine.name)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        withAnimation {
+            .frame(maxHeight: 50)
+            Group {
+                List($routine.tasks) { $task in
+                    TaskRow(task: $task)
+                }
+                .navigationTitle($routine.name)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
                             routine.tasks.append(Task(instruction: "new task", durationSecs: 60))
+                        }) {
+                            Image(systemName: "plus")
                         }
-                    }) {
-                        Image(systemName: "plus")
                     }
                 }
             }
@@ -72,5 +79,13 @@ struct TaskRow: View {
             }
         }
         .padding(.vertical, 4)
+    }
+}
+
+@available(iOS 18.0, *)
+#Preview {
+    @Previewable @State var routine: Routine = exampleRoutine
+    NavigationStack {
+        RoutineView(routine: $routine)
     }
 }
