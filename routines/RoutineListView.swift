@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct RoutineListView: View {
-    @StateObject private var viewModel = RoutineViewModel()
+    @State private var routines: [Routine] = []
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.routines) { routine in
-                    NavigationLink(destination: RoutineView(routineId: routine.id, viewModel: viewModel)) {
-                        RoutineRow(routine: routine, viewModel: viewModel)
-                    }
+            List($routines) { $routine in
+                NavigationLink(destination: RoutineView(routine: $routine)) {
+                    RoutineRow(routine: $routine)
                 }
             }
             .navigationTitle("Routines")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.addRoutine()
+                        routines.append(Routine(name: "new routine", tasks: [Task(instruction: "new task", durationSecs: 60)]))
                     }) {
                         Image(systemName: "plus")
                     }
@@ -33,18 +31,14 @@ struct RoutineListView: View {
     }
 }
 
-struct RoutineRow: View {
-    let routine: Routine
-    @ObservedObject var viewModel: RoutineViewModel
+public struct RoutineRow: View {
+    @Binding var routine: Routine
     @State private var isEditing = false
     @State private var editedName: String = ""
 
-    var body: some View {
+    public var body: some View {
         if isEditing {
-            TextField("Routine name", text: $editedName, onCommit: {
-                viewModel.updateRoutineName(routineId: routine.id, newName: editedName)
-                isEditing = false
-            })
+            TextField("Routine name", text: $editedName, onCommit: {routine.name = editedName})
             .textFieldStyle(RoundedBorderTextFieldStyle())
         } else {
             Text(routine.name)
