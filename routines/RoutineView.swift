@@ -11,30 +11,26 @@ struct RoutineView: View {
     @Binding var routine: Routine
 
     var body: some View {
-//        VStack {
-            NavigationView {
-                NavigationLink(destination: TimerView(tasks: $routine.tasks)) {
-                    Image(systemName: "play")
-                    Text("Play")
-                }
+        NavigationLink(destination: TimerView(tasks: $routine.tasks)) {
+            Image(systemName: "play")
+            Text("Play")
+        }
+        .frame(maxHeight: 200)
+        Group {
+            List($routine.tasks) { $task in
+                TaskRow(task: $task)
             }
-            .frame(maxHeight: 200)
-            Group {
-                List($routine.tasks) { $task in
-                    TaskRow(task: $task)
-                }
-                .navigationTitle($routine.name)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            routine.tasks.append(Task(instruction: "new task", durationSecs: 60))
-                        }) {
-                            Image(systemName: "plus")
-                        }
+            .navigationTitle($routine.name)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        routine.tasks.append(Task(instruction: "new task", durationSecs: 60))
+                    }) {
+                        Image(systemName: "plus")
                     }
                 }
             }
-//        }
+        }
     }
 }
 
