@@ -17,15 +17,13 @@ struct RoutineView: View {
         }
         .frame(maxHeight: 200)
         Group {
-            List($routine.tasks) { $task in
-                TaskRow(task: $task)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            routine.tasks.removeAll(where: {$0.id == $task.id})
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
+            List {
+                ForEach($routine.tasks) { $task in
+                    TaskRow(task: $task)
+                }
+                .onDelete { indexSet in
+                    routine.tasks.remove(atOffsets: indexSet)
+                }
             }
             .navigationTitle($routine.name)
             .toolbar {
