@@ -11,7 +11,7 @@ struct RoutineView: View {
     @Binding var routine: Routine
 
     var body: some View {
-        NavigationLink(destination: TimerView(tasks: $routine.tasks)) {
+        NavigationLink(destination: TimerView(tasks: routine.tasks)) {
             Image(systemName: "play")
             Text("Play")
         }
@@ -59,7 +59,7 @@ struct TaskRow: View {
 
             if isEditingDuration {
                 TextField("Duration (seconds)", text: $editedDuration, onCommit: {
-                    if let duration = UInt(editedDuration) {
+                    if let duration = Int(editedDuration) {
                         task.durationSecs = duration
                     }
                     isEditingDuration = false

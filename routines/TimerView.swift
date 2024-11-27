@@ -11,16 +11,13 @@ import AVFoundation
 let lang: String = "en-AU"
 
 struct TimerView: View {
-    @Binding var tasks: [Task]
+    let tasks: [Task]
     @State private var secondsElapsed: Int = 0
     /// The timer needs to be part of the view state so that it can be cancelled in the onDisappear lifecycle function
     @State private var timer: Timer? = nil
+    @State private var addedSecondsForTask: [UUID: Int] = [:]
+
     private let synthesizer = AVSpeechSynthesizer()
-
-
-    init(tasks: Binding<[Task]>) {
-        _tasks = tasks
-    }
 
     var body: some View {
         VStack {
@@ -36,15 +33,27 @@ struct TimerView: View {
                         Text("\(inProgressTask().remainingSecs) seconds left")
                     }
                 }
+            HStack {
+                Button("+ 30s") {
+                    if timer != nil && timer!.isValid {
+                        addedSecondsForTask[inProgressTask().task.id]? += 30
+                    }
+                }
+                Button("skip") {
+                    secondsElapsed += inProgressTask().remainingSecs
+                }
+            }
         }
+        .padding()
         .onAppear {
-            synthesizer.speak(utterance(text: "Start with \(inProgressTask().task.instruction)"))
+            addedSecondsForTask = Dictionary(uniqueKeysWithValues: tasks.map { ($0.id, 0)})
+            synthesizer.speak(utterance("Start with \(inProgressTask().task.instruction)"))
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 if secondsElapsed == totalSeconds() {
+                    timer.invalidate()
                     synthesizer.speak(
                         utterance(
-                            text: "You have finished"))
-                    timer.invalidate()
+                            "Good job. You finished"))
                 } else {
                     let currentTask = inProgressTask().task
                     secondsElapsed += 1
@@ -52,7 +61,7 @@ struct TimerView: View {
                     if currentTask.id != nextTask.id {
                         synthesizer.speak(
                             utterance(
-                                text: "Move from \(currentTask.instruction) to \(nextTask.instruction)!"))
+                                "Move from \(currentTask.instruction) to \(nextTask.instruction)!"))
                     }
                 }
             }
@@ -64,24 +73,27 @@ struct TimerView: View {
         }
     }
 
-    func totalSeconds() -> UInt {
+    func totalSeconds() -> Int {
         tasks.reduce(0) {
-            $0 + $1.durationSecs
+            $0 + $1.durationSecs + addedSecondsForTask[$1.id, default: 0]
         }
     }
 
-    func inProgressTask() -> (task: Task, remainingSecs: UInt) {
+    func inProgressTask() -> (task: Task, remainingSecs: Int) {
         var uncountedSeconds = secondsElapsed
+        print("uncounted seconds: ", uncountedSeconds)
         for task in tasks {
-            if uncountedSeconds <= task.durationSecs {
-                return (task, task.durationSecs - UInt(uncountedSeconds))
+            let taskTotalSeconds = task.durationSecs + addedSecondsForTask[task.id, default: 0]
+            print(task.instruction, task.durationSecs, "total:",taskTotalSeconds)
+            if uncountedSeconds < taskTotalSeconds {
+                return (task, taskTotalSeconds - uncountedSeconds)
             }
-            uncountedSeconds -= Int(task.durationSecs)
+            uncountedSeconds -= taskTotalSeconds
         }
         return (tasks.last.unsafelyUnwrapped, 0)
     }
 
-    func utterance(text: String) -> AVSpeechUtterance {
+    func utterance(_ text: String) -> AVSpeechUtterance {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: lang)
         return utterance
@@ -90,6 +102,5 @@ struct TimerView: View {
 
 @available(iOS 18.0, *)
 #Preview {
-    @Previewable @State var routine: Routine = exampleRoutine
-    TimerView.init(tasks: $routine.tasks)
+    TimerView.init(tasks: exampleRoutine.tasks)
 }
