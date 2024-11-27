@@ -21,6 +21,9 @@ struct RoutineListView: View {
                 .onDelete { indexSet in
                     routines.remove(atOffsets: indexSet)
                 }
+                .onMove { from,to in
+                    routines.move(fromOffsets: from, toOffset: to)
+                }
             }
             .navigationTitle("Routines")
             .toolbar {

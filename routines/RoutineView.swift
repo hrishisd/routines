@@ -24,6 +24,9 @@ struct RoutineView: View {
                 .onDelete { indexSet in
                     routine.tasks.remove(atOffsets: indexSet)
                 }
+                .onMove {from,to in
+                    routine.tasks.move(fromOffsets: from, toOffset: to)
+                }
             }
             .navigationTitle($routine.name)
             .toolbar {
