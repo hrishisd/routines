@@ -19,6 +19,13 @@ struct RoutineView: View {
         Group {
             List($routine.tasks) { $task in
                 TaskRow(task: $task)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            routine.tasks.removeAll(where: {$0.id == $task.id})
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
             }
             .navigationTitle($routine.name)
             .toolbar {
