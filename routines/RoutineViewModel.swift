@@ -1,14 +1,16 @@
 import SwiftUI
 import Foundation
 
-struct Routine: Identifiable {
-    let id = UUID()
+struct Routine: Identifiable, Codable, Equatable {
+    var id = UUID()
     var name: String
     var tasks: [Task]
+
+
 }
 
-struct Task: Identifiable {
-    let id = UUID()
+struct Task: Identifiable, Codable, Equatable {
+    var id = UUID()
     var instruction: String
     var durationSecs: Int
 }

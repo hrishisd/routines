@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		698FA2052CF65718006F7B26 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698FA2042CF65718006F7B26 /* TimerView.swift */; };
+		698FA2072CF7A693006F7B26 /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698FA2062CF7A690006F7B26 /* RoutineStore.swift */; };
 		69B6240C2CF2972700A927D5 /* RoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */; };
 		69B6240E2CF2975B00A927D5 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240D2CF2975B00A927D5 /* RoutineListView.swift */; };
 		69B624102CF2979000A927D5 /* RoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6240F2CF2979000A927D5 /* RoutineView.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		698FA2042CF65718006F7B26 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		698FA2062CF7A690006F7B26 /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
 		69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineViewModel.swift; sourceTree = "<group>"; };
 		69B6240D2CF2975B00A927D5 /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
 		69B6240F2CF2979000A927D5 /* RoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineView.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 		69F9DC2B2CF25883001B305F /* routines */ = {
 			isa = PBXGroup;
 			children = (
+				698FA2062CF7A690006F7B26 /* RoutineStore.swift */,
 				69B6240B2CF2972700A927D5 /* RoutineViewModel.swift */,
 				69F9DC2C2CF25883001B305F /* routinesApp.swift */,
 				69B6240D2CF2975B00A927D5 /* RoutineListView.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				698FA2052CF65718006F7B26 /* TimerView.swift in Sources */,
 				69B6240E2CF2975B00A927D5 /* RoutineListView.swift in Sources */,
+				698FA2072CF7A693006F7B26 /* RoutineStore.swift in Sources */,
 				69B624102CF2979000A927D5 /* RoutineView.swift in Sources */,
 				69B6240C2CF2972700A927D5 /* RoutineViewModel.swift in Sources */,
 				69F9DC2D2CF25883001B305F /* routinesApp.swift in Sources */,

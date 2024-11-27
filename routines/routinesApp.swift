@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct routinesApp: App {
+    @StateObject private var store: RoutineStore = RoutineStore()
+
     var body: some Scene {
         WindowGroup {
-            RoutineListView()
+            RoutineListView(routines: $store.routines)
+                .onAppear {
+                    store.load()
+                }
+                .onChange(of: store.routines) { _ in
+                    store.save()
+                }
         }
     }
 }

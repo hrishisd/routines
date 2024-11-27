@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RoutineListView: View {
-    @State var routines: [Routine] = [exampleRoutine]
+    @Binding var routines: [Routine]
 
     var body: some View {
         NavigationView {
@@ -50,6 +50,8 @@ public struct RoutineRow: View {
     }
 }
 
+@available(iOS 18.0, *)
 #Preview {
-    RoutineListView()
+    @Previewable @State var routines: [Routine] = [exampleRoutine]
+    RoutineListView(routines: $routines)
 }
