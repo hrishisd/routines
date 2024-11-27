@@ -13,9 +13,10 @@ let lang: String = "en-AU"
 struct TimerView: View {
     @Binding var tasks: [Task]
     @State private var secondsElapsed: Int = 0
+    /// The timer needs to be part of the view state so that it can be cancelled in the onDisappear lifecycle function
+    @State private var timer: Timer? = nil
     private let synthesizer = AVSpeechSynthesizer()
 
-    var timer: Timer?
 
     init(tasks: Binding<[Task]>) {
         _tasks = tasks
@@ -38,7 +39,7 @@ struct TimerView: View {
         }
         .onAppear {
             synthesizer.speak(utterance(text: "Start with \(inProgressTask().task.instruction)"))
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 if secondsElapsed == totalSeconds() {
                     synthesizer.speak(
                         utterance(
@@ -48,7 +49,6 @@ struct TimerView: View {
                     let currentTask = inProgressTask().task
                     secondsElapsed += 1
                     let nextTask = inProgressTask().task
-                    print("updating seconds elapsed")
                     if currentTask.id != nextTask.id {
                         synthesizer.speak(
                             utterance(
@@ -56,6 +56,11 @@ struct TimerView: View {
                     }
                 }
             }
+        }
+        .onDisappear() {
+            timer?.invalidate()
+            timer = nil
+            synthesizer.stopSpeaking(at: .immediate)
         }
     }
 
