@@ -12,9 +12,14 @@ struct RoutineListView: View {
 
     var body: some View {
         NavigationView {
-            List($routines) { $routine in
-                NavigationLink(destination: RoutineView(routine: $routine)) {
-                    RoutineRow(routine: $routine)
+            List {
+                ForEach($routines) { $routine in
+                    NavigationLink(destination: RoutineView(routine: $routine)) {
+                        RoutineRow(routine: $routine)
+                    }
+                }
+                .onDelete { indexSet in
+                    routines.remove(atOffsets: indexSet)
                 }
             }
             .navigationTitle("Routines")
